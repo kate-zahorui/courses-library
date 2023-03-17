@@ -29,4 +29,9 @@ export const UserAPI = {
     const response = await instance.get(`/core/preview-courses`);
     return response.data.courses;
   },
+
+  fetchCourseById: async (id: string) => {
+    const response = await instance.get(`/core/preview-courses/${id}`);
+    return response.data;
+  },
 };

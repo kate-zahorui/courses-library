@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getToken, getCourses } from "./coursesOperations";
-import { ICourse, IState } from "../../types/courses";
+import { getToken, getCourses, getCourseById } from "./coursesOperations";
+import { ICourse, ICourseDetails, IState } from "../../types/courses";
 
 const initialState: IState = {
   token: null,
@@ -14,12 +14,7 @@ const initialState: IState = {
 export const coursesSlice = createSlice({
   name: "courses",
   initialState: initialState,
-  reducers: {
-    setJob: (state, action: PayloadAction<string>) => {
-      const job = state.items.find((i) => i.id === action.payload)!;
-      state.currentCourse = job;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       // ---------- getToken ----------
@@ -57,10 +52,24 @@ export const coursesSlice = createSlice({
       .addCase(getCourses.rejected, (state: IState, action: any) => {
         state.isLoading = false;
         state.error = action.payload.message;
+      })
+      // ---------- getCourseById ----------
+      .addCase(getCourseById.pending, (state: IState, _: any) => {
+        state.isLoading = true;
+        state.error = "";
+      })
+      .addCase(
+        getCourseById.fulfilled,
+        (state: IState, action: PayloadAction<ICourseDetails>) => {
+          state.isLoading = false;
+          state.currentCourse = action.payload;
+        }
+      )
+      .addCase(getCourseById.rejected, (state: IState, action: any) => {
+        state.isLoading = false;
+        state.error = action.payload.message;
       });
   },
 });
-
-export const { setJob } = coursesSlice.actions;
 
 export default coursesSlice.reducer;

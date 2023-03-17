@@ -1,30 +1,51 @@
-export interface ICourse {
-  id: string;
-  title: string;
-  tags: string[];
-  launchDate: string;
-  status: string;
+export interface IMeta {
+  slug: string;
+  skills: string[];
+  courseVideoPreview: {
+    link: string;
+    duration: number;
+    previewImageLink: string;
+  };
+}
+
+export interface ICourseCommon {
+  containsLockedLessons: boolean;
   description: string;
   duration: number;
-  lessonsCount: number;
-  containsLockedLessons: boolean;
+  id: string;
+  launchDate: string;
+  meta: IMeta;
   previewImageLink: string;
   rating: number;
-  meta: {
-    slug: string;
-    skills: string[];
-    courseVideoPreview: {
-      link: string;
-      duration: number;
-      previewImageLink: string;
-    };
-  };
+  status: string;
+  tags: string[];
+  title: string;
+}
+
+export interface ILesson {
+  duration: number;
+  id: string;
+  link: string;
+  meta: IMeta | null;
+  order: number;
+  previewImageLink: string;
+  status: string;
+  title: string;
+  type: string;
+}
+
+export interface ICourse extends ICourseCommon {
+  lessonsCount: number;
+}
+
+export interface ICourseDetails extends ICourseCommon {
+  lessons: ILesson[];
 }
 
 export interface IState {
   token: string | null;
   items: Array<ICourse> | [];
-  currentCourse: ICourse | null;
+  currentCourse: ICourseDetails | null;
   isLoading: boolean;
   error: string;
   perPage: number;
