@@ -16,7 +16,7 @@ const CoursesCataloguePage: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!token) return;
+    if (!token || items.length > 0) return;
     dispatch(getCourses());
     // eslint-disable-next-line
   }, [token]);

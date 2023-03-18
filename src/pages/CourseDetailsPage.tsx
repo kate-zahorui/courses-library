@@ -19,6 +19,7 @@ const CourseDetailsPage: React.FunctionComponent = () => {
 
   useEffect(() => {
     if (!courseId || !token) return;
+    window.scrollTo(0, 0);
     dispatch(getCourseById(courseId));
     // eslint-disable-next-line
   }, [token, courseId]);

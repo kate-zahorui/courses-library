@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
 import {
   Box,
   Card,
@@ -50,29 +51,31 @@ const CoursesList: React.FunctionComponent = () => {
               key={i.id}
               sx={{ flexGrow: 1 }}
             >
-              <Card sx={{ height: "100%" }}>
-                <CardHeader title={i.title} />
-                <CardMedia
-                  component="img"
-                  height="200"
-                  image={`${i.previewImageLink}/cover.webp`}
-                  alt={`${i.title}`}
-                />
-                <CardContent>
-                  <Typography variant="body2" color="text.secondary">
-                    <b>Lessons:</b> {i.lessonsCount}
-                  </Typography>
-                  {i.meta?.skills && (
+              <Link to={`/${i.id}`}>
+                <Card sx={{ height: "100%" }}>
+                  <CardHeader title={i.title} />
+                  <CardMedia
+                    component="img"
+                    height="200"
+                    image={`${i.previewImageLink}/cover.webp`}
+                    alt={`${i.title}`}
+                  />
+                  <CardContent>
                     <Typography variant="body2" color="text.secondary">
-                      <b>Skills:</b>
-                      {i.meta.skills?.length > 0 && i.meta.skills.join(", ")}
+                      <b>Lessons:</b> {i.lessonsCount}
                     </Typography>
-                  )}
-                  <Typography variant="body2" color="text.secondary">
-                    <b>Rating:</b> {i.rating}
-                  </Typography>
-                </CardContent>
-              </Card>
+                    {i.meta?.skills && (
+                      <Typography variant="body2" color="text.secondary">
+                        <b>Skills:</b>
+                        {i.meta.skills?.length > 0 && i.meta.skills.join(", ")}
+                      </Typography>
+                    )}
+                    <Typography variant="body2" color="text.secondary">
+                      <b>Rating:</b> {i.rating}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Link>
             </Grid>
           ))}
       </Grid>
