@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { UserAPI } from "../../services/api";
+import { UserAPI } from "../../services/api/api";
 import { ICourse, ICourseDetails } from "../../types/courses";
 
 export const getToken = createAsyncThunk(

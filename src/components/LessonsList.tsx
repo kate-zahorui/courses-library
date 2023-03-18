@@ -1,25 +1,27 @@
-import { useAppSelector } from "../hooks/reduxHooks";
+import { Card, CardContent, Grid, Typography } from "@mui/material";
+import { useAppSelector } from "../services/hooks/reduxHooks";
 import { ILesson } from "../types/courses";
 
 const LessonsList: React.FunctionComponent = () => {
   const { currentCourse } = useAppSelector((state) => state.courses);
+
   if (!currentCourse) return null;
 
   return (
-    <ul>
+    <Grid container spacing={3} mt={3}>
       {currentCourse.lessons &&
         currentCourse.lessons.map((i: ILesson) => (
-          <li key={i.id}>
-            <h2>
-              Lesson {i.order}. {i.title}
-            </h2>
-            <img
-              src={`${i.previewImageLink}/lesson-${i.order}.webp`}
-              alt={`${i.title}`}
-            />
-          </li>
+          <Grid item key={i.id} xs={12}>
+            <Card>
+              <CardContent>
+                <Typography>
+                  Lesson {i.order}. {i.title}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
         ))}
-    </ul>
+    </Grid>
   );
 };
 

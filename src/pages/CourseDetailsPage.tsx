@@ -1,8 +1,14 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../services/hooks/reduxHooks";
 import { getCourseById } from "../redux/courses/coursesOperations";
-import { CourseDetails } from "../components";
+import {
+  ContentContainer,
+  CourseDetails,
+  Header,
+  HeaderTitle,
+  MainLayout,
+} from "../components";
 
 const CourseDetailsPage: React.FunctionComponent = () => {
   const { token, currentCourse, isLoading, error } = useAppSelector(
@@ -21,11 +27,19 @@ const CourseDetailsPage: React.FunctionComponent = () => {
 
   return (
     <div>
-      <h1>Course details</h1>
-      {isLoading && <p>Loading...</p>}
-      {error && <p>Error. {error}</p>}
+      <Header>
+        <ContentContainer>
+          <HeaderTitle title="Course details" />
+        </ContentContainer>
+      </Header>
+      <MainLayout>
+        <ContentContainer>
+          {isLoading && <p>Loading...</p>}
+          {error && <p>Error. {error}</p>}
 
-      {showDetails && <CourseDetails />}
+          {showDetails && <CourseDetails />}
+        </ContentContainer>
+      </MainLayout>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { useAppDispatch } from "./hooks/reduxHooks";
+import { useAppDispatch } from "./services/hooks/reduxHooks";
 import { getToken } from "./redux/courses/coursesOperations";
 import { CourseDetailsPage, CoursesCataloguePage } from "./pages";
 
