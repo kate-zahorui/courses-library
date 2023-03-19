@@ -54,7 +54,7 @@ const VideoModal: React.FunctionComponent<IProps> = ({ lesson }) => {
           justifyContent: "center",
         }}
       >
-        <VideoPlayer link={lesson.link} />
+        <VideoPlayer link={lesson.link} videoId={lesson.id} />
       </DialogContent>
     </Dialog>
   );

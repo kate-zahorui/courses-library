@@ -7,8 +7,11 @@ import { LessonsList, ReturnButton, VideoPlayer } from "./";
 const CourseDetails: React.FunctionComponent = () => {
   const { currentCourse } = useAppSelector((state) => state.courses);
   const isMediumScreen = useMediaScreen("md");
-  const videoLink = useMemo(() => {
-    return currentCourse?.lessons[0].link;
+
+  const firstVideo = useMemo(() => {
+    if (!currentCourse) return null;
+    const firstVideo = currentCourse.lessons.find((i) => i.order === 1);
+    return firstVideo;
   }, [currentCourse]);
 
   if (!currentCourse) return null;
@@ -29,9 +32,9 @@ const CourseDetails: React.FunctionComponent = () => {
           </Typography>
           <ReturnButton />
         </Box>
-        {videoLink && (
+        {firstVideo && (
           <Box width={isMediumScreen ? 700 : "100%"}>
-            <VideoPlayer link={videoLink} />
+            <VideoPlayer link={firstVideo.link} videoId={firstVideo.id} />
           </Box>
         )}
 

@@ -1,11 +1,14 @@
 import Hls from "hls.js";
-import { useRef, useEffect } from "react";
+import throttle from "lodash.throttle";
+import { useRef, useEffect, useCallback, useMemo } from "react";
+import ls from "../utils/localStorage";
 
 interface IProps {
   link: string;
+  videoId: string;
 }
 
-const VideoPlayer: React.FunctionComponent<IProps> = ({ link }) => {
+const VideoPlayer: React.FunctionComponent<IProps> = ({ link, videoId }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -15,26 +18,38 @@ const VideoPlayer: React.FunctionComponent<IProps> = ({ link }) => {
       var hls = new Hls();
       hls.loadSource(link);
       hls.attachMedia(videoRef.current);
+
+      const savedTime = Number(ls.load(`video-time-${videoId}`));
+      if (savedTime && videoRef?.current) {
+        videoRef.current.currentTime = savedTime;
+      }
     } else {
       alert("Sorry, your browser doesn't support this video player.");
     }
   }, [videoRef, link]);
 
-  const onTouchInsidePlayer = () => {
-    if (videoRef?.current?.paused) {
-      videoRef.current.play();
-    } else {
-      videoRef?.current?.pause();
-    }
-  };
+  const handleTimeUpdate = useCallback(() => {
+    if (!videoRef || !videoRef.current) return;
+
+    const seconds = Math.floor(videoRef.current.currentTime);
+    ls.save(`video-time-${videoId}`, seconds.toString());
+  }, [videoRef, videoId]);
+
+  const throttledTimeUpdate = useMemo(
+    () =>
+      throttle(() => {
+        handleTimeUpdate();
+      }, 1000),
+    [handleTimeUpdate]
+  );
 
   return (
     <video
       id="video"
       ref={videoRef}
-      onClick={onTouchInsidePlayer}
       controls
       width={"100%"}
+      onTimeUpdate={throttledTimeUpdate}
     ></video>
   );
 };
