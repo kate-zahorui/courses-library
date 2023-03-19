@@ -26,7 +26,7 @@ const VideoPlayer: React.FunctionComponent<IProps> = ({ link, videoId }) => {
     } else {
       alert("Sorry, your browser doesn't support this video player.");
     }
-  }, [videoRef, link]);
+  }, [videoRef, link, videoId]);
 
   const handleTimeUpdate = useCallback(() => {
     if (!videoRef || !videoRef.current) return;

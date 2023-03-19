@@ -48,7 +48,6 @@ export const coursesSlice = createSlice({
           state.isLoading = false;
 
           if (action.payload.length > 0) {
-            console.log(" action.payload", action.payload);
             state.items = action.payload;
           }
         }

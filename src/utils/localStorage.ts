@@ -16,7 +16,6 @@ const load = (key: string) => {
   }
 };
 
-export default {
-  save,
-  load,
-};
+const ls = { save, load };
+
+export default ls;
