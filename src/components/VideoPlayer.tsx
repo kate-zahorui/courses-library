@@ -28,6 +28,33 @@ const VideoPlayer: React.FunctionComponent<IProps> = ({ link, videoId }) => {
     }
   }, [videoRef, link, videoId]);
 
+  useEffect(() => {
+    if (!videoRef) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!videoRef.current) return;
+
+      switch (event.code) {
+        case "ArrowUp":
+          if (videoRef.current.playbackRate >= 2) return;
+          videoRef.current.playbackRate += 0.25;
+          break;
+        case "ArrowDown":
+          if (videoRef.current.playbackRate <= 0.25) return;
+          videoRef.current.playbackRate -= 0.25;
+          break;
+        default:
+          return;
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [videoRef]);
+
   const handleTimeUpdate = useCallback(() => {
     if (!videoRef || !videoRef.current) return;
 

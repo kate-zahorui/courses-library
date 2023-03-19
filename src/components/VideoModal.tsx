@@ -7,10 +7,13 @@ import {
   IconButton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { useAppDispatch, useAppSelector } from "../services/hooks/reduxHooks";
 import { updateModalStatus } from "../redux/courses/coursesSlice";
 import { VideoPlayer } from "./";
 import { ILesson } from "../types/courses";
+import Typography from "@mui/material/Typography";
 
 interface IProps {
   lesson: ILesson;
@@ -49,12 +52,24 @@ const VideoModal: React.FunctionComponent<IProps> = ({ lesson }) => {
 
       <DialogContent
         sx={{
-          padding: "0 0 20px 0",
+          padding: 0,
           display: "flex",
+          flexDirection: "column",
           justifyContent: "center",
         }}
       >
         <VideoPlayer link={lesson.link} videoId={lesson.id} />
+        <Typography
+          sx={{
+            padding: "12px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          Press <ArrowDropUpIcon fontSize="large" /> ArrowUp to increase speed
+          and <ArrowDropDownIcon fontSize="large" /> ArrowDown to reduce it
+        </Typography>
       </DialogContent>
     </Dialog>
   );
