@@ -39,7 +39,17 @@ const LessonsList: React.FunctionComponent = () => {
         {currentLessons &&
           currentLessons.map((i: ILesson) => (
             <Grid item key={i.id} xs={12}>
-              <Card onClick={() => handleLessonOpen(i.id)} sx={{}}>
+              <Card
+                onClick={() => handleLessonOpen(i.id)}
+                sx={{
+                  cursor: "pointer",
+                  scale: "1",
+                  transition: "scale 250ms ease-in-out",
+                  "&:hover": {
+                    scale: "1.01",
+                  },
+                }}
+              >
                 <CardContent>
                   <Typography>
                     Lesson {i.order}. {i.title}
