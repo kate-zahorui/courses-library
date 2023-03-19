@@ -48,5 +48,5 @@ export interface IState {
   currentCourse: ICourseDetails | null;
   isLoading: boolean;
   error: string;
-  perPage: number;
+  isModalShown: boolean;
 }

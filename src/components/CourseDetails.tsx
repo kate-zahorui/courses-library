@@ -1,11 +1,12 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { useMemo } from "react";
 import { useAppSelector } from "../services/hooks/reduxHooks";
+import useMediaScreen from "../services/hooks/useMediaScreen";
 import { LessonsList, ReturnButton, VideoPlayer } from "./";
 
 const CourseDetails: React.FunctionComponent = () => {
   const { currentCourse } = useAppSelector((state) => state.courses);
-
+  const isMediumScreen = useMediaScreen("md");
   const videoLink = useMemo(() => {
     return currentCourse?.lessons[0].link;
   }, [currentCourse]);
@@ -17,7 +18,6 @@ const CourseDetails: React.FunctionComponent = () => {
         <Box mb={3} display="flex" justifyContent="space-between">
           <Typography
             variant="h2"
-            // mb={3}
             sx={{
               fontSize: "28px",
               "@media screen and (min-width: 900px)": {
@@ -29,7 +29,11 @@ const CourseDetails: React.FunctionComponent = () => {
           </Typography>
           <ReturnButton />
         </Box>
-        {videoLink && <VideoPlayer link={videoLink} />}
+        {videoLink && (
+          <Box width={isMediumScreen ? 700 : "100%"}>
+            <VideoPlayer link={videoLink} />
+          </Box>
+        )}
 
         <Typography variant="subtitle1" mt={4}>
           {currentCourse.description}

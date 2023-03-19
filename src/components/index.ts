@@ -6,4 +6,5 @@ export { default as HeaderTitle } from "./HeaderTitle";
 export { default as LessonsList } from "./LessonsList";
 export { default as MainLayout } from "./MainLayout";
 export { default as ReturnButton } from "./ReturnButton";
+export { default as VideoModal } from "./VideoModal";
 export { default as VideoPlayer } from "./VideoPlayer";

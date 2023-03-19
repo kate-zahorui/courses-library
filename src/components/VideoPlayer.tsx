@@ -1,6 +1,5 @@
 import Hls from "hls.js";
 import { useRef, useEffect } from "react";
-import useMediaScreen from "../services/hooks/useMediaScreen";
 
 interface IProps {
   link: string;
@@ -8,7 +7,6 @@ interface IProps {
 
 const VideoPlayer: React.FunctionComponent<IProps> = ({ link }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const isMediumScreen = useMediaScreen("md");
 
   useEffect(() => {
     if (!videoRef.current) return;
@@ -36,7 +34,7 @@ const VideoPlayer: React.FunctionComponent<IProps> = ({ link }) => {
       ref={videoRef}
       onClick={onTouchInsidePlayer}
       controls
-      width={isMediumScreen ? 700 : "100%"}
+      width={"100%"}
     ></video>
   );
 };

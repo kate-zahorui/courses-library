@@ -8,13 +8,17 @@ const initialState: IState = {
   currentCourse: null,
   isLoading: false,
   error: "",
-  perPage: 15,
+  isModalShown: false,
 };
 
 export const coursesSlice = createSlice({
   name: "courses",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    updateModalStatus: (store: IState, action: PayloadAction<boolean>) => {
+      store.isModalShown = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       // ---------- getToken ----------
@@ -71,5 +75,7 @@ export const coursesSlice = createSlice({
       });
   },
 });
+
+export const { updateModalStatus } = coursesSlice.actions;
 
 export default coursesSlice.reducer;
