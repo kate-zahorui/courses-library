@@ -29,7 +29,7 @@ export interface ILesson {
   meta: IMeta | null;
   order: number;
   previewImageLink: string;
-  status: string;
+  status: "locked" | "unlocked";
   title: string;
   type: string;
 }

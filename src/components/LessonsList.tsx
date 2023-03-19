@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../services/hooks/reduxHooks";
 import { ILesson } from "../types/courses";
 import { updateModalStatus } from "../redux/courses/coursesSlice";
 import { VideoModal } from "./";
+import { toast } from "react-toastify";
 
 const LessonsList: React.FunctionComponent = () => {
   const { currentCourse, isModalShown } = useAppSelector(
@@ -25,6 +26,9 @@ const LessonsList: React.FunctionComponent = () => {
   const handleLessonOpen = (id: string) => {
     const lesson = currentCourse.lessons.find((i) => i.id === id);
     if (!lesson) return;
+    if (lesson.status === "locked") {
+      return toast.warn("Sorry, this lesson is locked");
+    }
     setLesson(lesson);
     dispatch(updateModalStatus(true));
   };
