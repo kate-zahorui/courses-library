@@ -7,6 +7,7 @@ import {
   CourseDetails,
   Header,
   HeaderTitle,
+  Loader,
   MainLayout,
 } from "../components";
 
@@ -20,6 +21,7 @@ const CourseDetailsPage: React.FunctionComponent = () => {
   useEffect(() => {
     if (!courseId || !token) return;
     window.scrollTo(0, 0);
+    if (currentCourse && courseId === currentCourse.id) return;
     dispatch(getCourseById(courseId));
     // eslint-disable-next-line
   }, [token, courseId]);
@@ -35,7 +37,7 @@ const CourseDetailsPage: React.FunctionComponent = () => {
       </Header>
       <MainLayout>
         <ContentContainer>
-          {isLoading && <p>Loading...</p>}
+          {isLoading && <Loader />}
           {error && <p>Error. {error}</p>}
 
           {showDetails && <CourseDetails />}

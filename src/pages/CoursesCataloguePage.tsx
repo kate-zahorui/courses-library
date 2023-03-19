@@ -6,6 +6,7 @@ import {
   CoursesList,
   Header,
   HeaderTitle,
+  Loader,
   MainLayout,
 } from "../components";
 
@@ -33,7 +34,7 @@ const CoursesCataloguePage: React.FunctionComponent = () => {
       </Header>
       <MainLayout>
         <ContentContainer>
-          {isLoading && <p>Loading...</p>}
+          {isLoading && <Loader />}
           {error && <p>Error. {error}</p>}
 
           {showCourses && <CoursesList />}
