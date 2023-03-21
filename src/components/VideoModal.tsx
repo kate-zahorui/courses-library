@@ -31,13 +31,26 @@ const VideoModal: React.FunctionComponent<IProps> = ({ lesson }) => {
     <Dialog onClose={handleClose} open={isModalShown} fullWidth maxWidth="md">
       <Box
         sx={{
-          paddingRight: "16px",
+          paddingRight: "8px",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          "@media screen and (min-width: 900px)": {
+            paddingRight: "16px",
+          },
         }}
       >
-        <DialogTitle>
+        <DialogTitle
+          sx={{
+            flexShrink: 1,
+            padding: "16px",
+            fontSize: "14px",
+            "@media screen and (min-width: 900px)": {
+              padding: "24px",
+              fontSize: "20px",
+            },
+          }}
+        >
           Lesson {lesson.order}. {lesson.title}
         </DialogTitle>
         <IconButton
@@ -65,6 +78,11 @@ const VideoModal: React.FunctionComponent<IProps> = ({ lesson }) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            flexWrap: "wrap",
+            fontSize: "11px",
+            "@media screen and (min-width: 900px)": {
+              fontSize: "16px",
+            },
           }}
         >
           Press <ArrowDropUpIcon fontSize="large" /> ArrowUp to increase speed

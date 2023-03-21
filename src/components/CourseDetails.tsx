@@ -18,7 +18,21 @@ const CourseDetails: React.FunctionComponent = () => {
   return (
     <>
       <div>
-        <Box mb={3} display="flex" justifyContent="space-between">
+        <Box
+          mb={3}
+          sx={{
+            "@media screen and (min-width: 900px)": {
+              display: "flex",
+              flexDirection: "row-reverse",
+              justifyContent: "space-between",
+              gap: "16px",
+            },
+          }}
+        >
+          <Box mb={isMediumScreen ? 0 : 2}>
+            <ReturnButton />
+          </Box>
+
           <Typography
             variant="h2"
             sx={{
@@ -30,7 +44,6 @@ const CourseDetails: React.FunctionComponent = () => {
           >
             {currentCourse.title}
           </Typography>
-          <ReturnButton />
         </Box>
         {firstVideo && (
           <Box width={isMediumScreen ? 700 : "100%"}>
